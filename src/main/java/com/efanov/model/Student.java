@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Student extends Person {
-    private Long id;
     private String birthday;
     private Long groupNumber;
 

@@ -1,4 +1,4 @@
-package com.efanov.dto.student;
+package com.efanov.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

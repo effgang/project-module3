@@ -1,6 +1,6 @@
 package com.efanov.service.impl;
 
-import com.efanov.exception.JsonParseException;
+import com.efanov.dto.DeleteResponse;
 import com.efanov.service.JsonParseService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static com.efanov.constant.LogConstant.*;
+import static com.efanov.constant.WebConstant.BAD_REQUEST;
+import static com.efanov.constant.WebConstant.NOT_FOUND;
 
 @Slf4j
 public class JsonParseServiceImpl implements JsonParseService {
@@ -21,24 +23,24 @@ public class JsonParseServiceImpl implements JsonParseService {
     }
 
     @Override
-    public String writeToJson(Object object) throws JsonParseException {
+    public String writeToJson(Object object) {
         try {
             log.info(TRYING_TO_CONVERT_OBJECT_TO_STRING, object);
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             log.error(CANNOT_PARSE_OBJECT_TO_STRING);
-            throw new JsonParseException();
+            return null;
         }
     }
 
     @Override
-    public Object readObject(InputStream json, Class object) throws JsonParseException {
+    public Object readObject(InputStream json, Class object) {
         try {
             log.info(TRYING_PARSE_JSON_TO_OBJECT, object);
             return objectMapper.readValue(json, object);
         } catch (IOException e) {
             log.error(CANNOT_PARSE_STRING_TO_OBJECT);
-            throw new JsonParseException();
+            return null;
         }
     }
 }

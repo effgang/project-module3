@@ -1,6 +1,6 @@
 package com.efanov.middleware;
 
-import com.efanov.dto.student.AbstractPeople;
+import com.efanov.dto.AbstractPeople;
 import lombok.extern.slf4j.Slf4j;
 
 import static com.efanov.constant.LogConstant.*;

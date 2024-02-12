@@ -1,6 +1,6 @@
 package com.efanov.middleware;
 
-import com.efanov.dto.student.AbstractPeople;
+import com.efanov.dto.AbstractPeople;
 
 public abstract class Middleware {
     private Middleware next;

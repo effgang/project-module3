@@ -14,11 +14,13 @@ import java.util.UUID;
 @NoArgsConstructor
 public class ErrorResponse {
     private String error;
+    private int statusCode;
     private String time;
     private UUID errorId;
 
-    public ErrorResponse(String error) {
+    public ErrorResponse(String error, int statusCode) {
         this.error = error;
+        this.statusCode = statusCode;
         this.time = LocalDateTime.now().toString();
         this.errorId = UUID.randomUUID();
     }

@@ -1,5 +1,6 @@
 package com.efanov.dto.student;
 
+import com.efanov.dto.AbstractPeople;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -20,4 +20,5 @@ public class LogConstant {
     public static final String SAVE_TEACHER_METHOD_CALL_WITH_VALUE = "SaveTeacher() method call with value {}";
     public static final String UPDATE_METHOD_CALL_WITH_VALUE = "update() method call with value {}";
     public static final String DELETE_METHOD_CALL_WITH_VALUE = "delete() method call with value {}";
+    public static final String CANT_UPDATE_TEACHER = "Cant update teacher with id {}";
 }

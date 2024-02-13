@@ -62,7 +62,6 @@ public class StudentController extends UtilityController implements HttpHandler 
                 } catch (ModelException e) {
                     sendStatus(exchange, studentService.delete(id), NOT_FOUND);
                 }
-
             }
         }
     }

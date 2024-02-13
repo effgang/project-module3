@@ -44,7 +44,7 @@ public class TeacherServiceImpl implements TeacherService {
         try {
             return teacherMapper.mapToResponse(teacherRepository.getTeacherByName(name));
         } catch (ModelException e) {
-            log.error(TEACHER_NOT_FOUND_BY_NAME,name);
+            log.error(TEACHER_NOT_FOUND_BY_NAME, name);
             return null;
         }
     }
@@ -55,7 +55,7 @@ public class TeacherServiceImpl implements TeacherService {
         try {
             return teacherMapper.mapToResponse(teacherRepository.getTeacherById(id));
         } catch (ModelException e) {
-            log.error(TEACHER_NOT_FOUND_BY_ID,id);
+            log.error(TEACHER_NOT_FOUND_BY_ID, id);
             return null;
         }
     }
@@ -72,7 +72,7 @@ public class TeacherServiceImpl implements TeacherService {
     public String save(TeacherRequest teacherRequest) {
         log.info(SAVE_TEACHER_METHOD_CALL_WITH_VALUE, teacherRequest);
         if (!middleware.check(teacherRequest)) {
-            return jsonParseService.writeToJson(new ErrorResponse(CAN_NOT_CREATE_TEACHER,BAD_REQUEST));
+            return jsonParseService.writeToJson(new ErrorResponse(CAN_NOT_CREATE_TEACHER, BAD_REQUEST));
         }
         Teacher teacherToSave = teacherMapper.mapToModel(teacherRequest);
         var result = teacherRepository.save(teacherToSave);
@@ -83,26 +83,29 @@ public class TeacherServiceImpl implements TeacherService {
     public String update(TeacherRequest teacherRequest, Long id) {
         log.info(UPDATE_METHOD_CALL_WITH_VALUE, teacherRequest);
         if (!middleware.check(teacherRequest)) {
-            return jsonParseService.writeToJson(new ErrorResponse(CAN_NOT_CREATE_TEACHER,BAD_REQUEST));
+            return jsonParseService.writeToJson(new ErrorResponse(CAN_NOT_CREATE_TEACHER, BAD_REQUEST));
         }
         Teacher newTeacher = teacherMapper.mapToModel(teacherRequest);
-        var result = teacherRepository.update(newTeacher, id);
-        return jsonParseService.writeToJson(teacherMapper.mapToResponse(result));
+        Teacher result;
+        try {
+            result = teacherRepository.update(newTeacher, id);
+            return jsonParseService.writeToJson(teacherMapper.mapToResponse(result));
+        } catch (ModelException e) {
+            log.error(CANT_UPDATE_TEACHER, id);
+            return jsonParseService.writeToJson(new ErrorResponse(CANT_UPDATE_TEACHER, NOT_FOUND));
+        }
+
     }
 
     @Override
     public String delete(Long id) {
         log.info(DELETE_METHOD_CALL_WITH_VALUE, id);
-        Teacher teacherToDelete;
         try {
-            teacherToDelete = teacherRepository.getTeacherById(id);
-            //teacherToDelete = teacherRepository.getAllTeachers().get((int) (id-1));
+            teacherRepository.delete(id);
         } catch (ModelException e) {
-            log.error(TEACHER_NOT_FOUND_BY_ID, id);
+            log.error(CANT_DELETE_TEACHER, id);
             return jsonParseService.writeToJson(new DeleteResponse(NOT_FOUND,false));
         }
-        teacherRepository.delete(teacherToDelete);
-        return jsonParseService.writeToJson(new DeleteResponse(NO_CONTENT,true));
+        return jsonParseService.writeToJson(new DeleteResponse(OK, true));
     }
-
 }

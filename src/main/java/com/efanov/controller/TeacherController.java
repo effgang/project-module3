@@ -1,13 +1,16 @@
 package com.efanov.controller;
 
+import com.efanov.dto.DeleteResponse;
 import com.efanov.dto.teacher.TeacherRequest;
 import com.efanov.service.JsonParseService;
 import com.efanov.service.TeacherService;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import lombok.extern.slf4j.Slf4j;
 
 import static com.efanov.constant.WebConstant.*;
 
+@Slf4j
 public class TeacherController extends UtilityController implements HttpHandler {
     private final JsonParseService jsonParseService;
     private final TeacherService teacherService;
@@ -29,10 +32,7 @@ public class TeacherController extends UtilityController implements HttpHandler 
                 sendStatus(exchange, teacherService.save((TeacherRequest) teacherRequest), CREATED);
             }
             case GET -> {
-                if (getIdFromPath(exchange) != 0) {
-                    var response = teacherService.getTeacherById(getIdFromPath(exchange));
-                    sendStatus(exchange, jsonParseService.writeToJson(response), OK);
-                } else if (requestParam == null) {
+                if (requestParam == null) {
                     var response = teacherService.getTeachers();
                     sendStatus(exchange, jsonParseService.writeToJson(response), OK);
                 } else if (requestParam.contains(ID)) {
@@ -52,11 +52,12 @@ public class TeacherController extends UtilityController implements HttpHandler 
             }
             case DELETE -> {
                 var id = getIdFromPath(exchange);
+//                var response = jsonParseService.readObject(exchange.getResponseBody(), DeleteResponse.class);
+//                System.out.println(response);
                 sendStatus(exchange, teacherService.delete(id), OK);
-
             }
-
         }
-    }
 
+    }
 }
+

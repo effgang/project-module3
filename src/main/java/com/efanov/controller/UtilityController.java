@@ -26,7 +26,7 @@ public class UtilityController {
 
     protected long getIdFromPath(HttpExchange exchange) {
         var requestURI = exchange.getRequestURI().getPath();
-        var split = requestURI.split("/");
+        //var split = requestURI.split("/");
         return Long.parseLong(requestURI.substring(requestURI.length() - 1));
     }
 

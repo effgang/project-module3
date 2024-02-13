@@ -47,6 +47,6 @@ public class StudentRepository {
     }
 
     public void delete(Student student) {
-        students.remove(students.get(students.indexOf(student)));
+        students.remove(student);
     }
 }

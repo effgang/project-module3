@@ -14,5 +14,4 @@ public class StudentResponse {
     private String name;
     private String surname;
     private String birthday;
-    private Long groupNumber;
 }

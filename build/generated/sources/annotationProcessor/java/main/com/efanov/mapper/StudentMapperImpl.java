@@ -7,8 +7,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-02-08T18:01:37+0300",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.5.jar, environment: Java 21.0.1 (Oracle Corporation)"
+    date = "2024-02-13T18:52:23+0300",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.5.jar, environment: Java 18.0.1.1 (Oracle Corporation)"
 )
 public class StudentMapperImpl implements StudentMapper {
 
@@ -24,7 +24,6 @@ public class StudentMapperImpl implements StudentMapper {
         student.setSurname( dto.getSurname() );
         student.setPhoneNumber( dto.getPhoneNumber() );
         student.setBirthday( dto.getBirthday() );
-        student.setGroupNumber( dto.getGroupNumber() );
 
         return student;
     }
@@ -41,7 +40,6 @@ public class StudentMapperImpl implements StudentMapper {
         studentResponse.name( student.getName() );
         studentResponse.surname( student.getSurname() );
         studentResponse.birthday( student.getBirthday() );
-        studentResponse.groupNumber( student.getGroupNumber() );
 
         return studentResponse.build();
     }

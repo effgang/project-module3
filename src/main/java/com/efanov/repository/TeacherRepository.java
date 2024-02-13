@@ -20,19 +20,19 @@ public class TeacherRepository {
     }
 
     public Teacher getTeacherByName(String name) throws ModelException {
-            return teachers.stream()
-                    .filter(el -> name.equals(el.getName()))
-                    .findFirst()
-                    .orElseThrow(() -> new ModelException(TEACHER_NOT_FOUND_BY_NAME, name));
+        return teachers.stream()
+                .filter(el -> name.equals(el.getName()))
+                .findFirst()
+                .orElseThrow(() -> new ModelException(TEACHER_NOT_FOUND_BY_NAME, name));
 
     }
 
     public Teacher getTeacherById(Long id) throws ModelException {
 
-            return teachers.stream()
-                    .filter(el -> el.getId().equals(id))
-                    .findFirst()
-                    .orElseThrow(() -> new ModelException(TEACHER_NOT_FOUND_BY_ID, id.toString()));
+        return teachers.stream()
+                .filter(el -> el.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new ModelException(TEACHER_NOT_FOUND_BY_ID, id.toString()));
 
     }
 
@@ -42,14 +42,14 @@ public class TeacherRepository {
         return teacher;
     }
 
-    public Teacher update(Teacher teacher, Long id) {
+    public Teacher update(Teacher teacher, Long id) throws ModelException {
         teacher.setId(id);
-        teachers.set((int) (id - 1), teacher);
+        teachers.set(teachers.indexOf(getTeacherById(id)), teacher);
 
         return teacher;
     }
 
-    public void delete(Teacher teacher) {
-        teachers.remove(teacher);
+    public void delete(Long id) throws ModelException {
+        teachers.remove(getTeacherById(id));
     }
 }

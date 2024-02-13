@@ -13,7 +13,6 @@ import com.efanov.model.Student;
 import com.efanov.repository.StudentRepository;
 import com.efanov.service.JsonParseService;
 import com.efanov.service.StudentService;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -73,7 +72,7 @@ public class StudentServiceImpl implements StudentService {
     public String save(StudentRequest studentRequest) {
         log.info(SAVE_STUDENT_METHOD_CALL_WITH_VALUE, studentRequest);
         if (!middleware.check(studentRequest)) {
-            return jsonParseService.writeToJson(new ErrorResponse(CANNOT_CREATE_STUDENT,BAD_REQUEST));
+            return jsonParseService.writeToJson(new ErrorResponse(CANNOT_CREATE_STUDENT, BAD_REQUEST));
         }
         Student studentToSave = studentMapper.mapToModel(studentRequest);
         var result = studentRepository.save(studentToSave);
@@ -84,7 +83,7 @@ public class StudentServiceImpl implements StudentService {
     public String update(StudentRequest studentRequest, Long id) {
         log.info(UPDATE_METHOD_CALL_WITH_VALUE, studentRequest);
         if (!middleware.check(studentRequest)) {
-            return jsonParseService.writeToJson(new ErrorResponse(CAN_NOT_CREATE_TEACHER,BAD_REQUEST));
+            return jsonParseService.writeToJson(new ErrorResponse(CAN_NOT_CREATE_TEACHER, BAD_REQUEST));
         }
         Student newStudent = studentMapper.mapToModel(studentRequest);
         var result = studentRepository.update(newStudent, id);
@@ -99,9 +98,9 @@ public class StudentServiceImpl implements StudentService {
             studentToDelete = studentRepository.getStudentById(id);
         } catch (ModelException e) {
             log.error(STUDENT_NOT_FOUND_BY_ID, id);
-            return jsonParseService.writeToJson(new DeleteResponse(NOT_FOUND,false));
+            return jsonParseService.writeToJson(new DeleteResponse(NOT_FOUND, false));
         }
         studentRepository.delete(studentToDelete);
-        return jsonParseService.writeToJson(new DeleteResponse(NO_CONTENT,true));
+        return jsonParseService.writeToJson(new DeleteResponse(NO_CONTENT, true));
     }
 }

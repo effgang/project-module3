@@ -6,7 +6,6 @@ public class WebConstant {
     public static final String GET = "GET";
     public static final String DELETE = "DELETE";
     public static final String PUT = "PUT";
-    public static final String CANNOT_CREATE_STUDENT = "Cannot create student";
     public static final String STUDENTS = "/students";
     public static final String TEACHERS = "/teachers";
     public static final String TEACHERS_ID = "/teachers/{}";

@@ -3,18 +3,17 @@ package com.efanov.service.impl;
 import com.efanov.service.JsonParseService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.DataInput;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 import static com.efanov.constant.LogConstant.*;
 
-@Slf4j
-public class JsonParseServiceImpl implements JsonParseService {
 
+public class JsonParseServiceImpl implements JsonParseService {
+    private static final Logger log = LoggerFactory.getLogger(JsonParseServiceImpl.class.getName());
     private final ObjectMapper objectMapper;
 
     public JsonParseServiceImpl() {
@@ -43,15 +42,5 @@ public class JsonParseServiceImpl implements JsonParseService {
         }
     }
 
-    @Override
-    public Object readObject(OutputStream json, Class object) {
-        try {
-            log.info(TRYING_PARSE_JSON_TO_OBJECT, object);
-            return objectMapper.readValue((DataInput) json, object);
-        } catch (IOException e) {
-            log.error(CANNOT_PARSE_STRING_TO_OBJECT);
-            return null;
-        }
-    }
 }
 

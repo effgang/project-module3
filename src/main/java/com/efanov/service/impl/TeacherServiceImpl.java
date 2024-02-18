@@ -1,9 +1,9 @@
 package com.efanov.service.impl;
 
+import com.efanov.dto.DecoratorResponse;
 import com.efanov.dto.DeleteResponse;
 import com.efanov.dto.ErrorResponse;
 import com.efanov.dto.teacher.TeacherRequest;
-import com.efanov.dto.teacher.TeacherResponse;
 import com.efanov.exception.ModelException;
 import com.efanov.mapper.TeacherMapper;
 import com.efanov.middleware.BirthDayMiddleware;
@@ -13,16 +13,16 @@ import com.efanov.model.Teacher;
 import com.efanov.repository.TeacherRepository;
 import com.efanov.service.JsonParseService;
 import com.efanov.service.TeacherService;
-import lombok.extern.slf4j.Slf4j;
-
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.efanov.constant.ExceptionConstan.*;
 import static com.efanov.constant.LogConstant.*;
-import static com.efanov.constant.WebConstant.*;
+import static com.efanov.constant.WebConstant.NOT_FOUND;
+import static com.efanov.constant.WebConstant.OK;
 
-@Slf4j
 public class TeacherServiceImpl implements TeacherService {
+    private static final Logger log = LoggerFactory.getLogger(TeacherServiceImpl.class.getName());
     private final TeacherRepository teacherRepository;
     private final JsonParseService jsonParseService;
     private final TeacherMapper teacherMapper;
@@ -40,72 +40,87 @@ public class TeacherServiceImpl implements TeacherService {
 
 
     @Override
-    public TeacherResponse getTeacherByName(String name) {
+    public DecoratorResponse<String> getTeacherByName(String name) {
         try {
-            return teacherMapper.mapToResponse(teacherRepository.getTeacherByName(name));
+            var result = teacherRepository.getTeacherByName(name);
+            return new DecoratorResponse<>(OK, jsonParseService.writeToJson(teacherMapper.mapToResponse(result)));
         } catch (ModelException e) {
-            log.error(TEACHER_NOT_FOUND_BY_NAME, name);
-            return null;
+            log.error(TEACHER_NOT_FOUND_BY_NAME);
+            return new DecoratorResponse<>(NOT_FOUND, jsonParseService.writeToJson(new ErrorResponse(TEACHER_NOT_FOUND_BY_NAME, NOT_FOUND)));
+        }
+    }
+
+    @Override
+    public DecoratorResponse<String> getTeacherBySurname(String surname) {
+        try {
+            var result = teacherRepository.getTeacherBySurname(surname);
+            return new DecoratorResponse<>(OK, jsonParseService.writeToJson(teacherMapper.mapToResponse(result)));
+        } catch (ModelException e) {
+            log.error(TEACHER_NOT_FOUND_BY_SURNAME);
+            return new DecoratorResponse<>(NOT_FOUND, jsonParseService.writeToJson(new ErrorResponse(TEACHER_NOT_FOUND_BY_SURNAME, NOT_FOUND)));
         }
     }
 
 
     @Override
-    public TeacherResponse getTeacherById(Long id) {
+    public DecoratorResponse<String> getTeacherById(Long id) {
         try {
-            return teacherMapper.mapToResponse(teacherRepository.getTeacherById(id));
+            var result = teacherRepository.getTeacherById(id);
+            return new DecoratorResponse<>(OK, jsonParseService.writeToJson(teacherMapper.mapToResponse(result)));
         } catch (ModelException e) {
-            log.error(TEACHER_NOT_FOUND_BY_ID, id);
-            return null;
+            log.error(TEACHER_NOT_FOUND_BY_ID);
+            return new DecoratorResponse<>(NOT_FOUND, jsonParseService.writeToJson(new ErrorResponse(TEACHER_NOT_FOUND_BY_ID, NOT_FOUND)));
         }
     }
 
-    public List<TeacherResponse> getTeachers() {
+    public DecoratorResponse<String> getTeachers() {
         log.info(GET_TEACHERS_METHOD_CALL);
-        return teacherRepository.getAllTeachers()
+        var list = teacherRepository.getAllTeachers()
                 .stream()
                 .map(teacherMapper::mapToResponse)
                 .toList();
+        return new DecoratorResponse<>(OK, jsonParseService.writeToJson(list));
     }
 
     @Override
-    public String save(TeacherRequest teacherRequest) {
+    public DecoratorResponse<String> save(TeacherRequest teacherRequest) {
         log.info(SAVE_TEACHER_METHOD_CALL_WITH_VALUE, teacherRequest);
         if (!middleware.check(teacherRequest)) {
-            return jsonParseService.writeToJson(new ErrorResponse(CAN_NOT_CREATE_TEACHER, BAD_REQUEST));
+            return new DecoratorResponse<>(NOT_FOUND, jsonParseService.writeToJson(new ErrorResponse(CANT_CREATE_TEACHER, NOT_FOUND)));
         }
         Teacher teacherToSave = teacherMapper.mapToModel(teacherRequest);
         var result = teacherRepository.save(teacherToSave);
-        return jsonParseService.writeToJson(teacherMapper.mapToResponse(result));
+        return new DecoratorResponse<>(OK, jsonParseService.writeToJson(teacherMapper.mapToResponse(result)));
+
     }
 
     @Override
-    public String update(TeacherRequest teacherRequest, Long id) {
+    public DecoratorResponse<String> update(TeacherRequest teacherRequest, Long id) {
         log.info(UPDATE_METHOD_CALL_WITH_VALUE, teacherRequest);
         if (!middleware.check(teacherRequest)) {
-            return jsonParseService.writeToJson(new ErrorResponse(CAN_NOT_CREATE_TEACHER, BAD_REQUEST));
+            return new DecoratorResponse<>(NOT_FOUND, jsonParseService.writeToJson(new ErrorResponse(CANT_CREATE_TEACHER, NOT_FOUND)));
         }
         Teacher newTeacher = teacherMapper.mapToModel(teacherRequest);
         Teacher result;
         try {
             result = teacherRepository.update(newTeacher, id);
-            return jsonParseService.writeToJson(teacherMapper.mapToResponse(result));
+            return new DecoratorResponse<>(OK, jsonParseService.writeToJson(teacherMapper.mapToResponse(result)));
         } catch (ModelException e) {
-            log.error(CANT_UPDATE_TEACHER, id);
-            return jsonParseService.writeToJson(new ErrorResponse(CANT_UPDATE_TEACHER, NOT_FOUND));
+            log.error(CANT_UPDATE_TEACHER);
+            return new DecoratorResponse<>(NOT_FOUND, jsonParseService.writeToJson(new ErrorResponse(CANT_UPDATE_TEACHER, NOT_FOUND)));
         }
 
     }
 
     @Override
-    public String delete(Long id) {
-        log.info(DELETE_METHOD_CALL_WITH_VALUE, id);
+    public DecoratorResponse<String> delete(Long id) {
         try {
+            log.info(DELETE_METHOD_CALL_WITH_VALUE, id);
             teacherRepository.delete(id);
         } catch (ModelException e) {
-            log.error(CANT_DELETE_TEACHER, id);
-            return jsonParseService.writeToJson(new DeleteResponse(NOT_FOUND,false));
+            log.error(CANT_DELETE_TEACHER);
+            return new DecoratorResponse<>(NOT_FOUND, jsonParseService.writeToJson(new ErrorResponse(CANT_DELETE_TEACHER, NOT_FOUND)));
         }
-        return jsonParseService.writeToJson(new DeleteResponse(OK, true));
+        return new DecoratorResponse<>(OK, jsonParseService.writeToJson(new DeleteResponse(OK)));
     }
 }

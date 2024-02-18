@@ -1,13 +1,15 @@
 package com.efanov.middleware;
 
 import com.efanov.dto.AbstractPeople;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.efanov.constant.LogConstant.*;
 import static com.efanov.constant.RegexConstant.DATE_FORMAT;
 
-@Slf4j
+
 public class BirthDayMiddleware extends Middleware {
+    private static final Logger log = LoggerFactory.getLogger(BirthDayMiddleware.class.getName());
 
     @Override
     public boolean check(AbstractPeople model) {

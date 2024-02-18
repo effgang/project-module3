@@ -1,5 +1,6 @@
-package com.efanov.model;
+package com.efanov.dto.timetable;
 
+import com.efanov.model.Subject;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,11 +8,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Timetable {
-    private Long id;
-    private Group group;
-    private Teacher teacher;
+public class TimetableRequest {
+    private Long groupID;
+    private Long teacherID;
     private String timeStart;
     private String timeEnd;
     private Subject subject;
+
 }

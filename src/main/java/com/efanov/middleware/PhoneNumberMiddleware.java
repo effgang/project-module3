@@ -2,13 +2,15 @@ package com.efanov.middleware;
 
 import com.efanov.constant.LogConstant;
 import com.efanov.dto.AbstractPeople;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.efanov.constant.LogConstant.CHECKING_PHONE;
 import static com.efanov.constant.RegexConstant.PHONE_REGEX;
 
-@Slf4j
+
 public class PhoneNumberMiddleware extends Middleware {
+    private static final Logger log = LoggerFactory.getLogger(PhoneNumberMiddleware.class.getName());
 
     public boolean check(AbstractPeople model) {
         log.debug(CHECKING_PHONE);

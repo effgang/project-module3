@@ -1,0 +1,610 @@
+{
+  "info": {
+    "_postman_id": "1d06af61-8802-4a79-9cd6-8831bb1ca656",
+    "name": "Project 3",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32173633"
+  },
+  "item": [
+    {
+      "name": "Student",
+      "item": [
+        {
+          "name": "add new student",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Anton\",\n    \"surname\": \"Ivanov\",\n    \"phoneNumber\": \"+79091040078\",\n    \"birthday\": \"22.12.2004\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{pr3}}/students",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "students"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "all students",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{pr3}}/students",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "students"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "student by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/students/4",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "students",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "student by params",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/students?surname=Ivanov",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "students"
+              ],
+              "query": [
+                {
+                  "key": "surname",
+                  "value": "Ivanov"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update student by id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Sergey\",\n    \"surname\": \"Semenov\",\n    \"phoneNumber\": \"+79091040078\",\n    \"birthday\": \"22.12.2004\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{pr3}}/students/7",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "students",
+                "7"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "student by id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/students/5",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "students",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Teacher",
+      "item": [
+        {
+          "name": "add new teacher",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Alan\",\n    \"surname\": \"Petrov\",\n    \"experience\": \"25\",\n    \"subjects\": [\n        \"MATH\",\n        \"PHYSIC\",\n        \"ECONOMICS\"\n    ],\n    \"phoneNumber\": \"+79995553525\",\n    \"birthday\": \"12.12.1954\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{pr3}}/teachers",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "teachers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "all teachers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/teachers",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "teachers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "teacher by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/teachers/2",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "teachers",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "teacher by params",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/teachers?name=Alan",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "teachers"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Alan"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update teacher by id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Zaur\",\n    \"surname\": \"Tregulov\",\n    \"experience\": 11,\n    \"subjects\": [\n        \"MATH\",\n        \"PHYSIC\"\n    ],\n    \"phoneNumber\": \"+79995553525\",\n    \"birthday\":\"12.12.1984\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{pr3}}/teachers/1",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "teachers",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "teachers by id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/teachers/3",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "teachers",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Groups",
+      "item": [
+        {
+          "name": "add new group",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"groupNumber\": 104,\n    \"studentsIds\": [1,2,3,4,5]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{pr3}}/groups",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "groups"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "all groups",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/groups",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "groups"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "group by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/groups/1",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "groups",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "group by params",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/groups?surname=Ivanov",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "groups"
+              ],
+              "query": [
+                {
+                  "key": "surname",
+                  "value": "Ivanov"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update group by id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"groupNumber\": 104,\n    \"studentsIds\": [1,2,3,4,6,7]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{pr3}}/groups/1",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "groups",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "group by id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/groups/1",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "groups",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Timetables",
+      "item": [
+        {
+          "name": "create timetable",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"groupID\":1,\n    \"teacherID\":1,\n    \"timeStart\":\"05-05-2024 13:30\",\n    \"timeEnd\":\"05-05-2024 15:00\",\n    \"subject\":\"PHYSIC\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{pr3}}/timetables",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "timetables"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "all timetables",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/timetables",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "timetables"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "timetable by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/timetables/1",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "timetables",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "timetable by teacher surname",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/timetables?teacherSurname=Petrov",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "timetables"
+              ],
+              "query": [
+                {
+                  "key": "teacherSurname",
+                  "value": "Petrov"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "timetable by student surname",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/timetables?studentSurname=Ivanov",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "timetables"
+              ],
+              "query": [
+                {
+                  "key": "studentSurname",
+                  "value": "Ivanov"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "timetable by group number",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/timetables?groupNumber=104",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "timetables"
+              ],
+              "query": [
+                {
+                  "key": "groupNumber",
+                  "value": "104"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update timetable by id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{pr3}}/timetables/1",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "timetables",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "timetable by id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{pr3}}/timetables/1",
+              "host": [
+                "{{pr3}}"
+              ],
+              "path": [
+                "timetables",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "pr3",
+      "value": "localhost:8080"
+    }
+  ]
+}

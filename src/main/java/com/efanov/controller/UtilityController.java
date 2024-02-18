@@ -26,8 +26,15 @@ public class UtilityController {
 
     protected long getIdFromPath(HttpExchange exchange) {
         var requestURI = exchange.getRequestURI().getPath();
-        //var split = requestURI.split("/");
-        return Long.parseLong(requestURI.substring(requestURI.length() - 1));
+        var split = requestURI.split("/");
+        switch (split.length) {
+            case 3 -> {
+                return Long.parseLong(extractInt(requestURI).trim());
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 
     protected Map<String, String> queryToMap(String query) {
@@ -44,6 +51,14 @@ public class UtilityController {
             }
         }
         return result;
+    }
+
+    protected String extractInt(String str) {
+        str = str.replaceAll("[^0-9]", " ");
+        str = str.replaceAll(" +", " ");
+        if (str.equals(""))
+            return "-1";
+        return str;
     }
 
 }

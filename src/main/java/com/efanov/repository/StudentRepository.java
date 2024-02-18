@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.efanov.constant.ExceptionConstan.STUDENT_NOT_FOUND_BY_ID;
-import static com.efanov.constant.ExceptionConstan.STUDENT_NOT_FOUND_BY_SURNAME;
+import static com.efanov.constant.ExceptionConstan.*;
 
 public class StudentRepository {
 
@@ -25,6 +24,13 @@ public class StudentRepository {
                 .orElseThrow(() -> new ModelException(STUDENT_NOT_FOUND_BY_SURNAME, surname));
     }
 
+    public Student getStudentByName(String name) throws ModelException {
+        return students.stream()
+                .filter(el -> name.equals(el.getName()))
+                .findFirst()
+                .orElseThrow(() -> new ModelException(STUDENT_NOT_FOUND_BY_NAME, name));
+    }
+
     public Student getStudentById(Long id) throws ModelException {
         return students.stream()
                 .filter(el -> el.getId().equals(id))
@@ -38,15 +44,14 @@ public class StudentRepository {
         return student;
     }
 
-    public Student update(Student student, Long id) {
-
-        students.set((int) (id - 1), student);
+    public Student update(Student student, Long id) throws ModelException {
         student.setId(id);
+        students.set(students.indexOf(getStudentById(id)), student);
 
         return student;
     }
 
-    public void delete(Student student) {
-        students.remove(student);
+    public void delete(Long id) throws ModelException {
+        students.remove(getStudentById(id));
     }
 }

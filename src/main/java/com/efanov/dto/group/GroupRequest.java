@@ -1,17 +1,13 @@
-package com.efanov.model;
+package com.efanov.dto.group;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Group {
-    private Long id;
+public class GroupRequest {
     private int groupNumber;
-    private List<Student> studentsInGroup;
-
+    private Long[] studentsIds;
 }

@@ -2,7 +2,6 @@ package com.efanov.repository;
 
 import com.efanov.exception.ModelException;
 import com.efanov.model.Teacher;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import static com.efanov.constant.ExceptionConstan.TEACHER_NOT_FOUND_BY_ID;
 import static com.efanov.constant.ExceptionConstan.TEACHER_NOT_FOUND_BY_NAME;
 
-@Slf4j
+
 public class TeacherRepository {
     private final CopyOnWriteArrayList<Teacher> teachers = new CopyOnWriteArrayList<>();
 
@@ -25,6 +24,13 @@ public class TeacherRepository {
                 .findFirst()
                 .orElseThrow(() -> new ModelException(TEACHER_NOT_FOUND_BY_NAME, name));
 
+    }
+
+    public Teacher getTeacherBySurname(String surname) throws ModelException {
+        return teachers.stream()
+                .filter(el -> surname.equals(el.getSurname()))
+                .findFirst()
+                .orElseThrow(() -> new ModelException(TEACHER_NOT_FOUND_BY_NAME, surname));
     }
 
     public Teacher getTeacherById(Long id) throws ModelException {

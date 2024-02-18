@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class StudentRequest extends AbstractPeople {
-    private Long groupNumber;
-
+    private String birthday;
 }

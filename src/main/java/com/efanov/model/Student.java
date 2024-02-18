@@ -1,15 +1,15 @@
 package com.efanov.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Student extends Person {
     private String birthday;
 
+    public Student(Long id, String name, String surname, String phoneNumber, String birthday) {
+        super(id, name, surname, phoneNumber);
+        this.birthday = birthday;
+    }
 }

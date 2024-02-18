@@ -1,20 +1,20 @@
 package com.efanov.service;
 
+import com.efanov.dto.DecoratorResponse;
 import com.efanov.dto.student.StudentRequest;
-import com.efanov.dto.student.StudentResponse;
-
-import java.util.List;
 
 public interface StudentService {
-    StudentResponse getStudentBySurname(String surname);
+    DecoratorResponse<String> getStudentsByName(String name);
 
-    StudentResponse getStudentById(Long id);
+    DecoratorResponse<String> getStudentBySurname(String surname);
 
-    List<StudentResponse> getStudents();
+    DecoratorResponse<String> getStudentById(Long id);
 
-    String save(StudentRequest studentRequest);
+    DecoratorResponse<String> getStudents();
 
-    String update(StudentRequest studentRequest, Long id);
+    DecoratorResponse<String> save(StudentRequest studentRequest);
 
-    String delete(Long id);
+    DecoratorResponse<String> update(StudentRequest studentRequest, Long id);
+
+    DecoratorResponse<String> delete(Long id);
 }

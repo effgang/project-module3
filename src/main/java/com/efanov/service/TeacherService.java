@@ -1,21 +1,20 @@
 package com.efanov.service;
 
+import com.efanov.dto.DecoratorResponse;
 import com.efanov.dto.teacher.TeacherRequest;
-import com.efanov.dto.teacher.TeacherResponse;
-import com.efanov.exception.ModelException;
-
-import java.util.List;
 
 public interface TeacherService {
-    TeacherResponse getTeacherByName(String name);
+    DecoratorResponse<String> getTeacherByName(String name);
 
-    TeacherResponse getTeacherById(Long id);
+    DecoratorResponse<String> getTeacherBySurname(String surname);
 
-    List<TeacherResponse> getTeachers();
+    DecoratorResponse<String> getTeacherById(Long id);
 
-    String save(TeacherRequest teacherRequest);
+    DecoratorResponse<String> getTeachers();
 
-    String update(TeacherRequest teacherRequest, Long id);
+    DecoratorResponse<String> save(TeacherRequest teacherRequest);
 
-    String delete(Long id);
+    DecoratorResponse<String> update(TeacherRequest teacherRequest, Long id);
+
+    DecoratorResponse<String> delete(Long id);
 }

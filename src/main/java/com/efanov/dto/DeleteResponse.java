@@ -14,11 +14,10 @@ import java.util.UUID;
 public class DeleteResponse {
     private UUID id;
     private int statusCode;
-    private boolean success;
 
-    public DeleteResponse(int statusCode, boolean success) {
+
+    public DeleteResponse(int statusCode) {
         this.id = UUID.randomUUID();
         this.statusCode = statusCode;
-        this.success = success;
     }
 }

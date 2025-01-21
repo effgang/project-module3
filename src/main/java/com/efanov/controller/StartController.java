@@ -51,7 +51,7 @@ public class StartController {
         TimetableController timetableController = new TimetableController(jsonParseService, timetableService);
 
         try {
-            HttpServer server = HttpServer.create(new InetSocketAddress(LOCALHOST, 8080), 0);
+            HttpServer server = HttpServer.create(new InetSocketAddress( 8080), 0);
             log.info(SERVER_STARTED);
             server.createContext(STUDENTS, studentController);
             server.createContext(TEACHERS, teacherController);

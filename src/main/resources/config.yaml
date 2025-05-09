@@ -1,0 +1,4 @@
+minStudentInGroup: 5
+maxStudentInGroup: 30
+
+maxCountLessonForGroup: 5
